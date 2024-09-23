@@ -1,0 +1,29 @@
+
+
+.wrapper{
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .form {
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    .image{
+      max-width: 200px;
+      height: 50px;
+    }
+
+    .submitButton{
+      height: 35px;
+      background-color: var(--primary-color);
+      color: #fff;
+      width: 100%;
+    }
+  }
+}
