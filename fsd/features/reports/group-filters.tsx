@@ -1,6 +1,6 @@
 'use client'
 
-import {Filter, useFilterActions} from "@/fsd/entities/filter";
+import {Filter, useFilterActions, useGetFiltersQueries} from "@/fsd/entities/filter";
 import {CustomSelect} from "@/fsd/shared/ui/customSelect/custom-select";
 import {FormProvider, useForm, useFieldArray} from "react-hook-form";
 import {getChartsData} from "@/fsd/entities/chart";
@@ -9,6 +9,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {useEffect} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {CustomText} from "@/fsd/shared/ui/CustomText";
+import {Loader} from "rsuite";
 
 type FilterWithSelectedValue = Filter & {
   selected_value: string;
@@ -18,7 +19,10 @@ type FormState = {
   filters: FilterWithSelectedValue[];
 }
 
-export const GroupFilters = ({filters}: { filters: Filter[] }) => {
+
+export const GroupFilters = () => {
+  const searchParams = useSearchParams()
+  const {data:filters,isSuccess,isFetching} = useGetFiltersQueries(+searchParams.get('group_id')!)
   const methods = useForm<FormState>();
   const {setFilters} = useFilterActions()
   const {control} = methods;
@@ -32,13 +36,13 @@ export const GroupFilters = ({filters}: { filters: Filter[] }) => {
   });
 
   useEffect(() => {
-    if (filters.length) {
+    if (isSuccess) {
       methods.reset({
         filters: filters,
       });
     }
 
-  }, [filters]);
+  }, [isSuccess,filters]);
 
 
   const handleFilter = async (data: FormState) => {
@@ -66,7 +70,7 @@ export const GroupFilters = ({filters}: { filters: Filter[] }) => {
             return {value: item.toString(), label: item};
           });
           return (
-            <div className={`w-56`}>
+            <div className={`w-56`} key={idx}>
               <CustomText>{field.filter_name}</CustomText>
               <CustomSelect
                 key={field.id} // уникальный ключ для каждого элемента

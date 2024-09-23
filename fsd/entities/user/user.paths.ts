@@ -1,3 +1,3 @@
 export enum UserPaths {
-  me = '/users/me'
+  ME = '/users/me'
 }

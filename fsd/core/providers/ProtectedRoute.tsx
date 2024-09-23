@@ -19,7 +19,20 @@ const ProtectedRoute = ({children}: { children: ReactNode }) => {
     }
   }, [router]);
 
-  return <>{tokenState ? children : <Loader/>}</>; // Если токен есть, отобразить дочерние компоненты
+  return (
+    <>
+      {
+        tokenState
+          ? children
+          : (
+            <div
+              className={'h-screen flex items-center justify-center'}>
+              <Loader size={'md'}/>
+            </div>
+          )
+      }
+    </>
+  ); // Если токен есть, отобразить дочерние компоненты
 };
 
 export default ProtectedRoute;

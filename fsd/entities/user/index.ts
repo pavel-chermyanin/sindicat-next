@@ -1,2 +1,2 @@
-export {useUserMeQueries} from "./user.queries";
-
+export {useUserActions} from "./model/user.selectors";
+export {useUserMeQueries} from "./api/user.queries";

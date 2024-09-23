@@ -1,5 +1,5 @@
 import shallow from "zustand/shallow";
-import {useFilterStore} from "./filter.slice";
+import {useFilterStore} from "./filter.store";
 
 export const useFilterActions = () => {
   const { filters,setFilters } = useFilterStore(

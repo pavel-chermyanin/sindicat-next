@@ -4,13 +4,20 @@ import React, {useEffect, useState} from "react";
 import {Nav} from "rsuite";
 import {useRouter, usePathname} from "next/navigation";
 import {Routing} from "@/fsd/shared/config/routing";
-import {useUserMeQueries} from "@/fsd/entities/user";
+import {useUserActions, useUserMeQueries} from "@/fsd/entities/user";
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname(); // Получаем текущий путь
   const {push, prefetch} = useRouter();
-  const {data} = useUserMeQueries()
+  const {data,isSuccess} = useUserMeQueries()
+  const {setUser} = useUserActions()
   const [active, setActive] = useState<string>(pathname); // Инициализация активного элемента
+
+  useEffect(() => {
+    if(isSuccess) {
+      setUser(data)
+    }
+  }, [isSuccess]);
 
   // // Предзагрузка маршрутов при загрузке приложения
   // useEffect(() => {
