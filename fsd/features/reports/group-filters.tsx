@@ -74,7 +74,7 @@ export const GroupFilters = () => {
         .map(filter => {
           return {
             filter_id: filter.filter_id,
-            filter_values: [filter.original_values[0]],
+            filter_values: filter.selected_value,
           }
         })
 
@@ -125,23 +125,31 @@ export const GroupFilters = () => {
       .slice(activeIndex + 1)
       .map(filter => filter.filter_id)
 
-    dependentFilterMutate({
-      data: {
-        filter_data: filterLeft,
-        to_recalculate: recalculateIds
-      },
-      group_id: +searchParams.get('group_id')!
-    })
-    // const filter_data = data.filters
-    //   .filter(filter => Array.isArray(filter.selected_value) && filter.selected_value.length > 0)
-    //   .map(filter => {
-    //     return {
-    //       filter_id: filter.filter_id,
-    //       filter_values: filter.selected_value ? [filter.selected_value.toString()] : [],
-    //     }
-    //   })
-    //
-    // setFilters(filter_data)
+    if(recalculateIds.length) {
+      dependentFilterMutate({
+        data: {
+          filter_data: filterLeft,
+          to_recalculate: recalculateIds
+        },
+        group_id: +searchParams.get('group_id')!
+      })
+    }
+
+
+
+    if(!recalculateIds.length) {
+      const filter_data = data.filters
+        .filter(filter => Array.isArray(filter.selected_value) && filter.selected_value.length > 0)
+        .map(filter => {
+          return {
+            filter_id: filter.filter_id,
+            filter_values: filter.selected_value ? [filter.selected_value.toString()] : [],
+          }
+        })
+
+      setFilters(filter_data)
+    }
+
 
 
   }

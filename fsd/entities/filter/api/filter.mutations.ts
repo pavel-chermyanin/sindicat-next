@@ -7,6 +7,7 @@ export const useGetDependentFilterMutation = () => {
     onSuccess: (data) => {
       return data;
     },
+
     onError: (error) => {
       // Преобразуем тип ошибки к unknown и затем проверим на наличие сообщения
       // const errorMessage = (error as unknown as { message?: { detail: string } })?.message;
