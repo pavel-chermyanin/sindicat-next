@@ -143,7 +143,7 @@ export const GroupFilters = () => {
         .map(filter => {
           return {
             filter_id: filter.filter_id,
-            filter_values: filter.selected_value ? [filter.selected_value.toString()] : [],
+            filter_values: filter.selected_value ? filter.selected_value : [],
           }
         })
 
