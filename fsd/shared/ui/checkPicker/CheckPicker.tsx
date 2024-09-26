@@ -62,7 +62,6 @@ export const CustomCheckPicker: React.FC<CustomCheckPickerProps> = (
         control={control}
         render={({field}) => (
           <CheckPicker
-            onClick={onClick}
             {...field}
             defaultValue={defaultValue}
             className={className}
