@@ -1,20 +1,21 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import {Nav} from "rsuite";
+import {Message, Nav} from "rsuite";
 import {useRouter, usePathname} from "next/navigation";
 import {Routing} from "@/fsd/shared/config/routing";
 import {useUserActions, useUserMeQueries} from "@/fsd/entities/user";
+import {getErrorMessage} from "@/fsd/shared/types/get-error-message.type-guard";
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname(); // Получаем текущий путь
   const {push, prefetch} = useRouter();
-  const {data,isSuccess} = useUserMeQueries()
+  const {data, isSuccess, error} = useUserMeQueries()
   const {setUser} = useUserActions()
   const [active, setActive] = useState<string>(pathname); // Инициализация активного элемента
 
   useEffect(() => {
-    if(isSuccess) {
+    if (isSuccess) {
       setUser(data)
     }
   }, [isSuccess]);
@@ -35,11 +36,22 @@ export const Navbar: React.FC = () => {
     push(eventKey); // Изменение URL
   };
 
+  const message = error ? (
+    <div style={{position: 'absolute', zIndex:1000}}>
+      <Message showIcon type={'error'} closable>
+        <strong>{getErrorMessage(error)}</strong>
+      </Message>
+    </div>
+  ) : null;
+
   return (
-    <Nav activeKey={active} onSelect={handleSelect}>
-      <Nav.Item eventKey={Routing.HOME}>Главная</Nav.Item>
-      <Nav.Item eventKey={Routing.REPORTS}>Отчеты</Nav.Item>
-      {/*<Nav.Item eventKey={Routing.REPORTS_LIST}>Список отчетов</Nav.Item>*/}
-    </Nav>
+    <>
+      {message}
+      <Nav activeKey={active} onSelect={handleSelect}>
+        <Nav.Item eventKey={Routing.HOME}>Главная</Nav.Item>
+        <Nav.Item eventKey={Routing.REPORTS}>Отчеты</Nav.Item>
+        {/*<Nav.Item eventKey={Routing.REPORTS_LIST}>Список отчетов</Nav.Item>*/}
+      </Nav>
+    </>
   );
 };

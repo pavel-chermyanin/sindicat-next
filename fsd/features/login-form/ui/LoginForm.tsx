@@ -16,6 +16,7 @@ import {ACCESS_TOKEN} from "@/fsd/core/global.constants";
 import {useLoginMutation} from "@/fsd/features/login-form";
 import {useRouter} from "next/navigation";
 import {Routing} from "@/fsd/shared/config/routing";
+import {getErrorMessage} from "@/fsd/shared/types/get-error-message.type-guard";
 
 export const LoginForm = () => {
 
@@ -43,21 +44,22 @@ export const LoginForm = () => {
     }
   });
 
-  const message = (
+
+  const message = error ? (
     <div style={{position: 'absolute'}}>
       <Message showIcon type={'error'} closable>
-        <strong>Неверный логин или пароль</strong>
+        <strong>{getErrorMessage(error)}</strong>
       </Message>
     </div>
+  ) : null;
 
-  );
   const onSubmit = async (form_data: AuthForm) => {
     await mutate(form_data)
   };
 
   return (
     <FormProvider {...methods}>
-      {error && message}
+      { message}
       <div className={cl(styles.wrapper)}>
         <div className={cl(styles.form)}>
           <Image className={styles.image} src={img} alt="logo"/>

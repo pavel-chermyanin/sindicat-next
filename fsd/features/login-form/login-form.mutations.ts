@@ -1,4 +1,3 @@
-// Хук для использования мутации
 import {useMutation} from "@tanstack/react-query";
 import {login} from "./login-form.actions";
 
@@ -6,14 +5,17 @@ export const useLoginMutation = () => {
   return useMutation({
     mutationFn: login,
     onSuccess: (data) => {
-      return data
+      return data;
     },
     onError: (error) => {
-      // Преобразуем тип ошибки к unknown и затем к { detail: string }
-      const errorMessage = (error as unknown as { message: { detail: string } }).message;
+      // Преобразуем тип ошибки к unknown и затем проверим на наличие сообщения
+      const errorMessage = (error as unknown as { message?: { detail: string } })?.message;
 
-      // Проверяем значение detail
-      return errorMessage.detail === 'LOGIN_BAD_CREDENTIALS' ? 'Неверный логин или пароль': errorMessage.detail;
+      // Проверяем, существует ли сообщение об ошибке и detail
+      const errorResponse = errorMessage?.detail === 'LOGIN_BAD_CREDENTIALS'
+        ? 'Неверный логин или пароль'
+        : 'Неизвестная ошибка';
+      return errorResponse;
     },
   });
 };

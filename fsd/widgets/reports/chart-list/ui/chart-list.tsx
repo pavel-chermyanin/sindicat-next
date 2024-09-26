@@ -12,6 +12,7 @@ import {CustomText} from "@/fsd/shared/ui/CustomText";
 import {useSearchParams} from "next/navigation";
 import {useGetGroupsQueries} from "@/fsd/entities/group/group.queries";
 import {useState} from "react";
+import {getErrorMessage} from "@/fsd/shared/types/get-error-message.type-guard";
 
 
 const ChartTypeView = ({chart}: { chart: ChartType }) => {
@@ -48,8 +49,7 @@ export const ChartList = () => {
   if (isLoading) {
     return <div className={'flex items-center justify-center mt-6'}><Loader size={'md'}/></div>
   }
-  console.log(combinedData)
-
+  console.log(error)
   return (
 
     <div className={styles.wrapper}>
@@ -57,6 +57,9 @@ export const ChartList = () => {
         <CustomHeading level={5}>{activeGroup?.group_name}</CustomHeading>
         <CustomText>{activeGroup?.description}</CustomText>
       </HeadingGroup>
+      {error && (
+        getErrorMessage(error)
+      )}
       <div className={cl(styles.grid, {
         [styles.col_2]: combinedData.length % 2 === 0,
         [styles.col_3]: Boolean(combinedData.length % 2),

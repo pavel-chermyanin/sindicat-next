@@ -9,6 +9,7 @@ export const useFilterStore = create<FilterState>()(
     (set) => ({
       filters: [],
       setFilters: (filters) => set({ filters }),
+
     }),
     { name: "filters", store: "filters" },
   ),

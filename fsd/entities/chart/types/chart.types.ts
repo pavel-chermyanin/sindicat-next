@@ -5,12 +5,13 @@ import {TableChartType} from "./table-chart.types";
 export type ChartDataType = BarChartType | TableChartType
 
 
-
 export type ChartType = {
   chart:ChartDataType
   id: number
   title: string
   description: string
-  ispercent: boolean,
+  ispercent: boolean
   formatting:BarChartFormatting
 };
+
+export type TypeChart = 'bar'| 'pie' | 'table'

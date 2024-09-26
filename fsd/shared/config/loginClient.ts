@@ -1,12 +1,11 @@
 import axios from "axios";
-import {ACCESS_TOKEN} from "@/fsd/core/global.constants";
+import {ACCESS_TOKEN, BASE_URL} from "@/fsd/core/global.constants";
 
-export const LOGIN_API = 'https://3e55-212-45-6-6.ngrok-free.app/auth'
 
 
 const createAxiosLoginInstance = () => {
   const instance = axios.create({
-    baseURL: LOGIN_API,
+    baseURL: `${BASE_URL}/auth`,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/x-www-form-urlencoded',

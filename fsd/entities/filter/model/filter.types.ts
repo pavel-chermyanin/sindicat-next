@@ -19,6 +19,12 @@ export type GetChartsFilterData = {
 }
 
 export type FilterState = {
-  filters:GetChartsFilterData[]
-  setFilters:(filters:GetChartsFilterData[]) => void
+  filters: GetChartsFilterData[]
+  setFilters: (filters: GetChartsFilterData[]) => void
+
+}
+
+export type DependentFilterRequest = {
+  to_recalculate: number[]
+  filter_data: GetChartsFilterData[]
 }

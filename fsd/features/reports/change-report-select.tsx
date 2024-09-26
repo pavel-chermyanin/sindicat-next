@@ -5,6 +5,7 @@ import {Report} from "@/fsd/entities/report/report.types";
 import {useEffect, useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {useGetReportsQueries} from "@/fsd/entities/report/report.queries";
+import {useUserActions} from "@/fsd/entities/user";
 
 
 type DataSelect = {
@@ -15,7 +16,17 @@ type DataSelect = {
 export const ChangeReportSelect = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const {data, isSuccess,isFetching} = useGetReportsQueries(+searchParams.get('client_id')!)
+  const {user} = useUserActions()
+  const {
+    data,
+    isSuccess,
+    isFetching
+  } = useGetReportsQueries(
+    // если роль не админ запрашивать отчеты клиента из user
+    user?.role !== 'admin'
+      ? user?.client_id!
+      : +searchParams.get('client_id')!)
+
   const [list, setList] = useState<DataSelect[]>([]);
 
   useEffect(() => {
@@ -28,7 +39,7 @@ export const ChangeReportSelect = () => {
     } else {
       setList([]); // Устанавливаем пустой список, если данных нет
     }
-  }, [isSuccess]);
+  }, [isSuccess,data]);
 
   const updateUrlParams = (value: string | null) => {
     const params = new URLSearchParams(searchParams.toString());

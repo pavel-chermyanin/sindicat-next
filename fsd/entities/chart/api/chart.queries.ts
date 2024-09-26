@@ -4,7 +4,6 @@ import {GetChartsFilterData} from "@/fsd/entities/filter";
 import {ChartDataType} from "../types/chart.types";
 
 export const useChartsData = (groupId: number, filterData: GetChartsFilterData[]) => {
-
   return useQuery({
     queryKey: ['chart', { group_id: groupId, filter_data: filterData }],
     queryFn: () => getChartsData({ group_id: groupId, filter_data: filterData }),
