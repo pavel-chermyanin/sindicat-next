@@ -66,9 +66,7 @@ export const GroupFilters = () => {
             selected_value: filter.selected_value || [filter.original_values[0]]
           }
         }),
-      },{
-
-      });
+      },);
 
       const resetFilters  = methods.getValues('filters')
 
@@ -86,16 +84,21 @@ export const GroupFilters = () => {
 
   }, [isSuccessDepedentFilters, dependentFilters]);
 
-  useEffect(() => {
-    console.log('triger')
-
-  }, [methods.trigger]);
+  // useEffect(() => {
+  //   console.log('triger')
+  //
+  // }, [methods.trigger]);
 
   useEffect(() => {
     if (isSuccess) {
       methods.reset({
-        filters: filters,
-      });
+        filters: (filters as FilterWithSelectedValue[]).map(filter => {
+          return {
+            ...filter,
+            selected_value:  [filter.original_values[0]]
+          }
+        }),
+      },);
     }
 
     if (!filters?.length) {

@@ -62,6 +62,9 @@ export const CustomCheckPicker: React.FC<CustomCheckPickerProps> = (
         control={control}
         render={({field}) => (
           <CheckPicker
+            menuStyle={{
+              width:200
+            }}
             {...field}
             defaultValue={defaultValue}
             className={className}
