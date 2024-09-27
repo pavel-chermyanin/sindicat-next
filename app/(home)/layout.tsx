@@ -1,12 +1,20 @@
 import type {Metadata} from "next";
-import {Inter} from "next/font/google";
+import {Poppins} from "next/font/google";
+import {Roboto} from "next/font/google";
 import 'rsuite/dist/rsuite-no-reset.min.css';
 import "../globals.css";
 import {Header} from "@/fsd/widgets/header";
 import {QueryProvider} from "@/fsd/core/providers/QueryProvider";
 import ProtectedRoute from "@/fsd/core/providers/ProtectedRoute";
 
-const inter = Inter({subsets: ["latin"]});
+const lora = Poppins({
+  weight:['400','500','600','700','800','900'],
+  subsets:['latin']
+});
+const roboto = Roboto({
+  weight:['400','500','700','900'],
+  subsets:['cyrillic']
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +28,7 @@ export default function RootLayout(
   }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-    <body className={`${inter.className} px-4 overflow-hidden`}>
+    <body className={`${roboto.className} px-4 overflow-hidden`}>
     <ProtectedRoute>
       <QueryProvider>
         <Header/>

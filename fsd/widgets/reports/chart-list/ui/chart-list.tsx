@@ -68,7 +68,7 @@ export const ChartList = () => {
 
         {combinedData.map(chart => {
           return (
-            <div key={chart.id}>
+            <div className={styles.grid_item} key={chart.id}>
               <CustomHeading level={6}>{chart.title}</CustomHeading>
               <ChartTypeView chart={chart}/>
             </div>

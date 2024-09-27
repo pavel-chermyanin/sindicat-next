@@ -13,7 +13,7 @@ import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {CustomText} from "@/fsd/shared/ui/CustomText";
 import {CustomCheckPicker} from "@/fsd/shared/ui/checkPicker/CheckPicker";
-import {me} from "@/fsd/entities/user/api/user.actions";
+import styles from './group-filters.module.scss'
 
 type FilterWithSelectedValue = Filter & {
   selected_value: string[];
@@ -158,14 +158,14 @@ export const GroupFilters = () => {
 
   return (
     <FormProvider {...methods}>
-      <div className={'mt-4 flex gap-2'}>
+      <div className={`${styles.wrapper}`}>
         {fields.map((field, idx) => {
           // const [openSelect, setOpenSelect] = useState(false)
           const data = field.original_values.map((item: string) => {
             return {value: item.toString(), label: item};
           });
           return (
-            <div className={`w-56`} key={idx}>
+            <div  key={idx}>
               <CustomText>{field.filter_name}</CustomText>
               <CustomCheckPicker
                 // onClick={() => setOpenSelect(true)}
