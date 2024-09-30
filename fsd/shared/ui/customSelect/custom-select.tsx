@@ -11,7 +11,8 @@ interface CustomSelectProps {
   placeholder?: string;
   className?: string;
   loading?: boolean
-  onChangeOutside?: (value: string) => void;
+  onChangeOutside?: (value: string | string[]) => void;
+  value?: string[];
 }
 
 export const CustomSelect: React.FC<CustomSelectProps> = (
@@ -21,7 +22,8 @@ export const CustomSelect: React.FC<CustomSelectProps> = (
     placeholder,
     className,
     loading = false,
-    onChangeOutside
+    onChangeOutside,
+    value
   }
 ) => {
   const {control} = useFormContext();
@@ -34,13 +36,15 @@ export const CustomSelect: React.FC<CustomSelectProps> = (
         <SelectPicker
           loading={loading}
           {...field}
+          value={Array.isArray(value) ? value[0] : field.value}
           data={data}
           placeholder={placeholder}
           className={cl(styles.select, className)}
-          onChange={(value) => {
-            field.onChange(value); // Обновляем значение в react-hook-form
+          onChange={(selectedValue) => {
+            const updatedValue = selectedValue ? [selectedValue] : [];
+            field.onChange(updatedValue); // Обновляем значение в react-hook-form
             if (onChangeOutside) {
-              onChangeOutside(value); // Вызываем handleSubmit из GroupFilters
+              onChangeOutside(updatedValue); // Вызываем onChangeOutside
             }
           }}
         />

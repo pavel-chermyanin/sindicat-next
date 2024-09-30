@@ -21,10 +21,10 @@ export const Navbar: React.FC = () => {
   }, [isSuccess]);
 
   // // Предзагрузка маршрутов при загрузке приложения
-  // useEffect(() => {
-  //   prefetch(Routing.HOME);    // Предзагрузка главной страницы
-  //   prefetch(Routing.REPORTS); // Предзагрузка страницы отчетов
-  // }, [prefetch]);
+  useEffect(() => {
+    prefetch(Routing.HOME);    // Предзагрузка главной страницы
+    prefetch(Routing.REPORTS); // Предзагрузка страницы отчетов
+  }, [prefetch]);
 
   // Устанавливаем активный элемент при монтировании компонента
   useEffect(() => {
@@ -46,7 +46,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      {message}
+      {/*{message}*/}
       <Nav activeKey={active} onSelect={handleSelect}>
         <Nav.Item eventKey={Routing.HOME}>Главная</Nav.Item>
         <Nav.Item eventKey={Routing.REPORTS}>Отчеты</Nav.Item>

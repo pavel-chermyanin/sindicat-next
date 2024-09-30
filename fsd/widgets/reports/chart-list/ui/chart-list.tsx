@@ -49,7 +49,6 @@ export const ChartList = () => {
   if (isLoading) {
     return <div className={'flex items-center justify-center mt-6'}><Loader size={'md'}/></div>
   }
-  console.log(error)
   return (
 
     <div className={styles.wrapper}>

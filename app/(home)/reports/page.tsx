@@ -5,6 +5,8 @@ import {GroupFilters} from "@/fsd/features/reports/group-filters";
 
 
 export default async function ReportPage() {
+
+
   return (
     <div>
       <TopFilters/>

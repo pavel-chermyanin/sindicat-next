@@ -46,7 +46,7 @@ export const BarChart = ({chart}: { chart: ChartType }) => {
   // Функция для динамического обновления графика
   const updateChart = () => {
     if (echartRef.current) {
-      console.log(echartRef.current.getEchartsInstance());
+      // console.log(echartRef.current.getEchartsInstance());
       echartRef.current.getEchartsInstance().resize(); // Перерасчет размеров графика
     }
   };
