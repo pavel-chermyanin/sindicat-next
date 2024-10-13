@@ -13,6 +13,7 @@ interface CustomSelectProps {
   loading?: boolean
   onChangeOutside?: (value: string | string[]) => void;
   value?: string[];
+  disabled?:boolean
 }
 
 export const CustomSelect: React.FC<CustomSelectProps> = (
@@ -23,7 +24,8 @@ export const CustomSelect: React.FC<CustomSelectProps> = (
     className,
     loading = false,
     onChangeOutside,
-    value
+    value,
+    disabled = false
   }
 ) => {
   const {control} = useFormContext();
@@ -34,6 +36,7 @@ export const CustomSelect: React.FC<CustomSelectProps> = (
       control={control}
       render={({field}) => (
         <SelectPicker
+          disabled={disabled}
           loading={loading}
           {...field}
           value={Array.isArray(value) ? value[0] : field.value}

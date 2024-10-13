@@ -11,6 +11,7 @@ const ProtectedRoute = ({children}: { children: ReactNode }) => {
 
   useLayoutEffect(() => {
     const token = localStorage.getItem(ACCESS_TOKEN); // Получение токена из localStorage
+    console.log(11111111111111111)
     if (!token) {
       setTokenState('')
       router.replace('/auth'); // Перенаправление на страницу логина, если токен отсутствует
@@ -18,6 +19,8 @@ const ProtectedRoute = ({children}: { children: ReactNode }) => {
       setTokenState(token)
     }
   }, [router]);
+
+
 
   return (
     <>

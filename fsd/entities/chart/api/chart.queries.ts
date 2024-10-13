@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import {ChartFormatting, ChartType, getChartsData, getChartsFormatting} from '@/fsd/entities/chart';
+import {BaseChartFormatting, ChartFormatting, getChartsData, getChartsFormatting} from '@/fsd/entities/chart';
 import {GetChartsFilterData} from "@/fsd/entities/filter";
 import {ChartDataType} from "../types/chart.types";
 
@@ -17,6 +17,6 @@ export const useChartsDataFormat = (groupId: number) => {
     queryKey: ['chart', groupId],
     queryFn: () => getChartsFormatting(groupId),
     enabled: !!groupId,
-    select:data => data as ChartFormatting[]
+    select:data => data as BaseChartFormatting[]
   });
 };

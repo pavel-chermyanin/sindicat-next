@@ -1,7 +1,4 @@
 
-
-import type {ChartFormatting} from '../types/chart-formatting.types'
-import {apiClient} from "@/fsd/shared/config/apiClient";
 import {ChartPaths} from "@/fsd/entities/chart/chart.paths";
 import {GetChartsFilterData} from "@/fsd/entities/filter";
 import {chartClient} from "@/fsd/shared/config/chartClient";

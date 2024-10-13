@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import {getGroups} from "./group.actions";
-import {Group} from "./group.types";
+import {Group} from "../model/group.types";
 
 
 export const useGetGroupsQueries = (report_id: number) => {

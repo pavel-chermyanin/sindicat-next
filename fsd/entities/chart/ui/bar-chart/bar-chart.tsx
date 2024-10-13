@@ -1,17 +1,21 @@
 'use client'
 
-import {BarChartType, ChartType} from "@/fsd/entities/chart";
+import {ChartType} from "@/fsd/entities/chart";
 import React, {useEffect, useRef, useState} from "react";
 import ReactECharts from 'echarts-for-react';
 import {EChartsOption} from "echarts";
 import {useSearchParams} from "next/navigation";
-import {useResize} from "../../utils/use-resize";
-import {legendConfig} from "@/fsd/entities/chart/config/chart.legend-config";
+import {useResize} from "../../hooks/use-resize";
+import {legendConfig} from "../../config/chart.legend-config";
+import styles from './bar-chart.module.scss'
+import {BarChartType} from "../../types/bar-chart.types";
+import {BarChartFormatting} from "../../types/chart-formatting.types";
 
 export const BarChart = ({chart}: { chart: ChartType }) => {
   const searchParams = useSearchParams();
   const echartRef = useRef<any>(null); // Реф для компонента ReactECharts
   const barChart = chart.chart as BarChartType;
+  const formatting = chart.formatting as BarChartFormatting;
 
   const getOption = (): EChartsOption => ({
     series: Object.keys(barChart.seriesData).map((seriesName) => {
@@ -19,11 +23,11 @@ export const BarChart = ({chart}: { chart: ChartType }) => {
         name: seriesName,
         type: 'bar',
         data: barChart.seriesData[seriesName],
-        stack: chart.formatting.stack ? 'total' : undefined,
+        stack: formatting.stack ? 'total' : undefined,
       }
     }),
     ...legendConfig,
-    xAxis: chart.formatting.isXAxis
+    xAxis: formatting.isXAxis
       ? {
         type: 'category',
         data: barChart.xAxisData,
@@ -32,7 +36,7 @@ export const BarChart = ({chart}: { chart: ChartType }) => {
         type: 'value'
       }
     ,
-    yAxis: chart.formatting.isXAxis
+    yAxis: formatting.isXAxis
       ? {
         type: 'value'
       }
@@ -59,11 +63,11 @@ export const BarChart = ({chart}: { chart: ChartType }) => {
   }, [searchParams.get('report_id')]);
 
   return (
-    <div style={{width: '100%', height: '600px'}}>
+    <div className={styles.wrapper}>
       <ReactECharts
         ref={echartRef}
         option={getOption()}
-        style={{height: '100%', width: '100%'}}
+        style={{ width: '100%',height:'100%'}}
         notMerge={true}
         lazyUpdate={true}
       />

@@ -1,6 +1,6 @@
 
 import {chartClient} from "@/fsd/shared/config/chartClient";
-import {GroupPaths} from "./group.paths";
+import {GroupPaths} from "../group.paths";
 
 
 export const getGroups = async (report_id:number) => {

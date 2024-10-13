@@ -1,7 +1,7 @@
 import {useEffect, useRef} from 'react';
 import {useSearchParams, useRouter} from 'next/navigation';
 import {Swiper as SwiperClass} from 'swiper';
-import {Group} from '@/fsd/entities/group/group.types';
+import {Group} from '@/fsd/entities/group/model/group.types';
 
 export const useHandleActiveGroup = (groups: Group[] = [], swiperRef: React.RefObject<SwiperClass | null>) => {
   const searchParams = useSearchParams();

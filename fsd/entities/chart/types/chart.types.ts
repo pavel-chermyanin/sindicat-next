@@ -1,8 +1,9 @@
-import {BarChartType} from "@/fsd/entities/chart";
-import {BarChartFormatting} from "./bar-chart.types";
-import {TableChartType} from "./table-chart.types";
 
-export type ChartDataType = BarChartType | TableChartType
+import {PivotChartType} from "./pivot-chart.types";
+import {BarChartType} from "./bar-chart.types";
+import {ChartFormatting} from "./chart-formatting.types";
+
+export type ChartDataType = BarChartType | PivotChartType
 
 
 export type ChartType = {
@@ -11,7 +12,7 @@ export type ChartType = {
   title: string
   description: string
   ispercent: boolean
-  formatting:BarChartFormatting
+  formatting: ChartFormatting;
 };
 
-export type TypeChart = 'bar'| 'pie' | 'table'
+export type TypeChart = 'bar'| 'pie' | 'table' | 'pivot'

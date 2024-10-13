@@ -12,6 +12,7 @@ export const CustomText = (
   }: CustomTextProps) => {
   return (
     <Text
+
       muted={muted}
     >
       {children}

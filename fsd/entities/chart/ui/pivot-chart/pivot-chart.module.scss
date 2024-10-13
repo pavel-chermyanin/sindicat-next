@@ -1,0 +1,24 @@
+
+
+.wrapper{
+  .table {
+    border-collapse: collapse; /* Убирает промежутки между границами ячеек */
+    width: 100%;
+  }
+
+  th, td {
+    min-width: 150px;
+    border: 1px solid #c3c1c1; /* Добавляет границу для всех ячеек */
+    padding: 4px;            /* Пространство внутри ячеек */
+    text-align: center;      /* Центрирование текста */
+  }
+
+  th {
+    background-color: #f2f2f2; /* Светлый фон для заголовков */
+  }
+
+  .empty {
+    color: #ccc; /* Цвет для пустых ячеек */
+  }
+
+}

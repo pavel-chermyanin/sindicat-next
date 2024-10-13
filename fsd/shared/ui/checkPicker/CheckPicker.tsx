@@ -36,7 +36,6 @@ export const CustomCheckPicker: React.FC<CustomCheckPickerProps> = (
     data,
     value,
     onChangeOutside,
-    lineColors,
     placeholder = `Выберите элемент`,
     className,
     searchable = false,
@@ -49,7 +48,6 @@ export const CustomCheckPicker: React.FC<CustomCheckPickerProps> = (
     disabledItemValues = [],
     defaultValue,
     open,
-    onClick
 
   }
 ) => {

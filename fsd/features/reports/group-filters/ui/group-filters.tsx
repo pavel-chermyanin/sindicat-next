@@ -15,6 +15,7 @@ import {CustomText} from "@/fsd/shared/ui/CustomText";
 import {CustomCheckPicker} from "@/fsd/shared/ui/checkPicker/CheckPicker";
 import styles from './group-filters.module.scss'
 import {FilterItem} from "@/fsd/features/reports/group-filters/ui/filter-item/filter-item";
+import {fi} from "date-fns/locale";
 
 export type FilterWithSelectedValue = Filter & {
   selected_value: string[];
@@ -63,9 +64,12 @@ export const GroupFilters = () => {
       // Выполняем частичный сброс, обновляя только поле `filters`
       methods.reset({
         filters: newFilters.map(filter => {
+
           return {
             ...filter,
-            selected_value: filter.selected_value || [filter.original_values[0]]
+            selected_value: filter.isactive
+              ? (filter.selected_value?.length ? filter.selected_value : (filter.original_values?.[0] ? [filter.original_values[0]] : []))
+              : []
           }
         }),
       }, {});
@@ -75,9 +79,10 @@ export const GroupFilters = () => {
 
       const filter_data = resetFilters
         .map(filter => {
+          console.log(filter)
           return {
             filter_id: filter.filter_id,
-            filter_values: filter.selected_value,
+            filter_values: filter.isactive ? filter.selected_value : [],
           }
         })
 
@@ -94,7 +99,7 @@ export const GroupFilters = () => {
         filters: (filters as FilterWithSelectedValue[]).map(filter => {
           return {
             ...filter,
-            selected_value: [filter.original_values[0]]
+            selected_value: filter.isactive ? [filter.original_values[0]] : []
           }
         }),
       },);
@@ -155,7 +160,7 @@ export const GroupFilters = () => {
       <div className={`${styles.wrapper}`}>
         {fields.map((field, idx) => {
           return (
-            <FilterItem key={idx}  idx={idx} field={field} handleFilter={handleFilter}/>
+            <FilterItem key={idx} idx={idx} field={field} handleFilter={handleFilter}/>
           );
         })}
       </div>

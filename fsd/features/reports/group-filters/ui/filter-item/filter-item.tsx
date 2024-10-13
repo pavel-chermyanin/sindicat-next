@@ -31,6 +31,7 @@ export const FilterItem = ({idx, field, handleFilter}: FilterItemProps) => {
 
   }, [field.original_values]);
 
+  // console.log(field)
   return (
     <div key={idx}>
       <CustomText>{field.filter_name}</CustomText>
@@ -38,9 +39,9 @@ export const FilterItem = ({idx, field, handleFilter}: FilterItemProps) => {
         ? (
           <CustomCheckPicker
             // disabledItemValues={isPending ? methods.getValues(`filters.${idx}.original_values`) : []}
-
+            disabled={!field.isactive}
             name={`filters.${idx}.selected_value`} // динамическое имя поля
-            value={methods.getValues(`filters.${idx}.selected_value`)}
+            value={field.selected_value}
             data={dataState}
             // open={openSelect}
             onChangeOutside={() => {
@@ -51,7 +52,8 @@ export const FilterItem = ({idx, field, handleFilter}: FilterItemProps) => {
         )
         : (
           <CustomSelect
-            value={methods.getValues(`filters.${idx}.selected_value`)}
+            disabled={!field.isactive}
+            value={field.selected_value}
             data={dataState}
             name={`filters.${idx}.selected_value`} // динамическое имя поля
             onChangeOutside={() => {

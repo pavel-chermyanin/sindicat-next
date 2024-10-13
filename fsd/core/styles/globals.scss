@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "mixins";
+@import "main";
+@import "variables";
+
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

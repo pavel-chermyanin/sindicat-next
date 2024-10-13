@@ -1,5 +1,5 @@
 import {LoginForm} from "@/fsd/features/login-form";
-import '../globals.css'
+import '../../fsd/core/styles/globals.scss'
 
 
 export default function AuthPage() {
@@ -7,3 +7,5 @@ export default function AuthPage() {
     <LoginForm/>
   );
 }
+
+// export const dynamic = 'force-dynamic'

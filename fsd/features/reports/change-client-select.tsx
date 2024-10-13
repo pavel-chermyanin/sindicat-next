@@ -7,6 +7,7 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {Routing} from "@/fsd/shared/config/routing";
 import {useGetClientsQueries} from "@/fsd/entities/client/client.queries";
 import * as sea from "node:sea";
+import {useUserActions} from "@/fsd/entities/user";
 
 type DataSelect = {
   label: string;
@@ -15,8 +16,9 @@ type DataSelect = {
 
 export const ChangeClientSelect = () => {
   const router = useRouter();
+  const {user} = useUserActions()
   const searchParams = useSearchParams();
-  const {data,isSuccess} = useGetClientsQueries()
+  const {data, isSuccess} = useGetClientsQueries()
   const [list, setList] = useState<DataSelect[]>([]);
 
   useEffect(() => {
@@ -44,6 +46,10 @@ export const ChangeClientSelect = () => {
     const value = searchParams.get('client_id');
     return value ? Number(value) : null;
   };
+
+  if (user?.role !== 'admin') {
+    return null
+  }
 
   return (
     <SelectPicker

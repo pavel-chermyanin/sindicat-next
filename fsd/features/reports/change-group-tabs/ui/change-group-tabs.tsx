@@ -11,7 +11,7 @@ import {useHandleActiveGroup} from '../hooks/use-handle-active-group';  // Пу�
 import {useHandleWheel} from '../hooks/use-handle-wheel';  // Путь к вашему хук-файлу
 import {useSearchParams, useRouter} from 'next/navigation';
 import {Group} from "@/fsd/entities/group";
-import {useGetGroupsQueries} from "@/fsd/entities/group/group.queries";
+import {useGetGroupsQueries} from "@/fsd/entities/group/api/group.queries";
 import {Loader} from "rsuite";
 
 export const ChangeGroupTabs = () => {
